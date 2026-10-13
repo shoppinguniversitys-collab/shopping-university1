@@ -195,3 +195,50 @@ export default function HomePage() {
     </main>
   );
 }
+/* Shopping University: subtle 3D product animation */
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .product-card.su-product {
+    transition:
+      transform 450ms ease,
+      box-shadow 450ms ease,
+      border-color 450ms ease;
+  }
+
+  .product-card.su-product:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 30px rgba(214, 181, 109, 0.16);
+  }
+
+  .product-card.su-product .product-image img {
+    transition: transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transform-origin: center;
+  }
+
+  .product-card.su-product:hover .product-image img {
+    transform: perspective(1000px)
+      rotateX(1deg)
+      rotateY(-1.5deg)
+      scale(1.035);
+  }
+}
+
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .product-card.su-product:active {
+    border-color: var(--gold);
+    box-shadow: 0 8px 22px rgba(214, 181, 109, 0.16);
+  }
+
+  .product-card.su-product:active .product-image img {
+    transform: scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card.su-product,
+  .product-card.su-product .product-image img {
+    transition: none !important;
+    transform: none !important;
+  }
+      }
