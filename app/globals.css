@@ -710,3 +710,28 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
+/* Scroll reveal animation */
+@keyframes su-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.category-card,
+.product-card {
+  animation: su-reveal 0.7s ease-out both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 35%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-card,
+  .product-card {
+    animation: none;
+  }
+}
