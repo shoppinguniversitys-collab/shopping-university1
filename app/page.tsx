@@ -42,6 +42,31 @@ const categories = [
 ];
 
 export default function HomePage() {
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  function addToCart(product: (typeof products)[number]) {
+    setCart((current) => {
+      const existing = current.find((item) => item.name === product.name);
+
+      if (existing) {
+        return current.map((item) =>
+          item.name === product.name
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+
+      return [...current, { ...product, quantity: 1 }];
+    });
+  }
+
+  function buyNow(product: (typeof products)[number]) {
+    setCart([{ ...product, quantity: 1 }]);
+    document.getElementById("checkout")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
   return (
     <main>
       <div className="announcement">
@@ -151,21 +176,117 @@ export default function HomePage() {
                 </span>
                 <h3>{product.name}</h3>
                 <div className="product-bottom">
-                  <strong>₹{product.price.toLocaleString("en-IN")}</strong>
-                  <a
-                    className="product-action"
-                    href="#order-info"
-                    aria-label={`View ${product.name}`}
-                  >
-                    ↗
-                  </a>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+  <strong>₹{product.price.toLocaleString("en-IN")}</strong>
+</div>
 
+<div className="product-buttons">
+  <button
+    type="button"
+    className="gold-button su-button"
+    onClick={() => addToCart(product)}
+  >
+    ADD TO CART
+  </button>
+
+  <button
+    type="button"
+    className="product-action"
+    onClick={() => buyNow(product)}
+  >
+    BUY NOW ↗
+  </button>
+</div>
+      </section>
+<section className="checkout-section" id="checkout">
+  <div className="section-heading">
+    <div>
+      <span className="eyebrow">CASH ON DELIVERY</span>
+      <h2 className="section-title">
+        Complete Your <span className="gold">Order</span>
+      </h2>
+    </div>
+  </div>
+
+  <div className="checkout-box">
+    <h3>Your Cart</h3>
+
+    {cart.length === 0 ? (
+      <p>Your cart is empty. Please add a product first.</p>
+    ) : (
+      <>
+        {cart.map((item) => (
+          <div className="checkout-item" key={item.name}>
+            <span>
+              {item.name} × {item.quantity}
+            </span>
+            <strong>
+              ₹{(item.price * item.quantity).toLocaleString("en-IN")}
+            </strong>
+          </div>
+        ))}
+
+        <div className="checkout-total">
+          <strong>Total (COD)</strong>
+          <strong>
+            ₹
+            {cart
+              .reduce((sum, item) => sum + item.price * item.quantity, 0)
+              .toLocaleString("en-IN")}
+          </strong>
+        </div>
+
+        <form
+          className="checkout-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            alert("Checkout form ready. Order saving will be connected next.");
+          }}
+        >
+          <label>
+            Full Name
+            <input name="name" required placeholder="Enter your full name" />
+          </label>
+
+          <label>
+            Mobile Number
+            <input
+              name="phone"
+              type="tel"
+              pattern="[6-9][0-9]{9}"
+              required
+              placeholder="10-digit mobile number"
+            />
+          </label>
+
+          <label>
+            Full Delivery Address
+            <textarea
+              name="address"
+              required
+              placeholder="House number, street, area, city, state"
+              rows={3}
+            />
+          </label>
+
+          <label>
+            PIN Code
+            <input
+              name="pincode"
+              inputMode="numeric"
+              pattern="[0-9]{6}"
+              required
+              placeholder="6-digit PIN code"
+            />
+          </label>
+
+          <button type="submit" className="gold-button su-button">
+            CONFIRM COD DETAILS
+          </button>
+        </form>
+      </>
+    )}
+  </div>
+</section>
       <section className="promise-section" id="order-info">
         <span className="eyebrow">A BETTER WAY TO SHOP</span>
         <h2>
