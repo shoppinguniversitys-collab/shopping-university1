@@ -80,7 +80,7 @@ export default function HomePage() {
             Discover timeless fashion, carefully selected
             for those who love to stand apart.
           </p>
-          <a className="gold-button" href="#collection">
+          <a className="gold-button su-button" href="#collection">
             EXPLORE COLLECTION ↗
           </a>
           <div className="hero-note">
@@ -89,7 +89,7 @@ export default function HomePage() {
         </div>
 
         <div className="hero-visual su-fade-up">
-          <div className="hero-image-frame">
+          <div className="hero-image-frame su-gold-glow">
             <img
               src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1100&q=90"
               alt="Fashion collection editorial"
