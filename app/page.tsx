@@ -69,7 +69,7 @@ export default function HomePage() {
       </header>
 
       <section className="hero" id="home">
-        <div className="hero-content">
+        <div className="hero-content su-fade-up">
           <span className="eyebrow">THE NEW STYLE EDITION</span>
           <h1>
             Style That
@@ -88,7 +88,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="hero-visual">
+        <div className="hero-visual su-fade-up">
           <div className="hero-image-frame">
             <img
               src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1100&q=90"
@@ -140,7 +140,7 @@ export default function HomePage() {
 
         <div className="product-grid">
           {products.map((product) => (
-            <article className="product-card" key={product.name}>
+            <article className="product-card su-product" key={product.name}>
               <a className="product-image" href="#order-info">
                 <img src={product.image} alt={product.name} />
                 <span className="product-tag">{product.tag}</span>
