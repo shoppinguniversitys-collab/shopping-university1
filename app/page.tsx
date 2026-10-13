@@ -195,9 +195,14 @@ export default function HomePage() {
   >
     BUY NOW ↗
   </button>
+          </div>
 </div>
-      </section>
-<section className="checkout-section" id="checkout">
+</article>
+))}
+</div>
+</section>
+
+  <section className="checkout-section" id="checkout">
   <div className="section-heading">
     <div>
       <span className="eyebrow">CASH ON DELIVERY</span>
